@@ -13,8 +13,9 @@ macro_rules! assert_fp_eq {
 macro_rules! assert_fpvec_eq {
     ($lhs:expr, $rhs:expr, $eps:expr) => {{
         use std::f64;
-        assert!(($lhs.iter().zip($rhs.iter()))
-            .fold(f64::NEG_INFINITY, |acc, (&l, &r)| acc.max((l as f64 - r as f64).abs())) < $eps);
+        assert!(($lhs.iter().zip($rhs.iter())).fold(f64::NEG_INFINITY, |acc, (l, r)| {
+                acc.max((l.clone() as f64 - r.clone() as f64).abs())
+        }) < $eps);
     }};
     ($lhs:expr, $rhs:expr) => {{
         const DEFAULT_EPS: f64 = 1.0e-6;
