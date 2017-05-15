@@ -32,7 +32,7 @@ macro_rules! assert_fpvec_neq {
     }};
     ($lhs:expr, $rhs:expr) => {{
         const DEFAULT_EPS: f64 = 1.0e-6;
-        assert_fpvec_eq!($lhs, $rhs, DEFAULT_EPS);
+        assert_fpvec_neq!($lhs, $rhs, DEFAULT_EPS);
     }};
 }
 
@@ -65,6 +65,7 @@ mod tests {
 
     #[test]
     fn test_assert_fpvec_neq() {
+        assert_fpvec_neq!([5.100001, 6.200002], [5.1000002, 6.2000005]);
         assert_fpvec_neq!([5.100000001, 6.200000002], [5.1000002, 6.2000005], 1e-8);
     }
 
@@ -72,6 +73,5 @@ mod tests {
     #[should_panic(expected = "assertion failed")]
     fn test_assert_fpvec_neq_fail() {
         assert_fpvec_neq!([5.1000001, 6.2000002], [5.1000002, 6.2000005]);
-        assert_fpvec_neq!([5.1000001, 6.2000002], [5.1000002, 6.2000005], 1e-4);
     }
 }
