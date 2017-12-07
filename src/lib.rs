@@ -1,3 +1,10 @@
+//! Unit test macro collections.
+//!
+//! Contains macros for asserting approximate equivalence for floating-point numbers, and for
+//! comparing whether or not two floating-point vectors (or any iterable) are approximately
+//! equivalent.
+
+#![warn(missing_docs)]
 
 #[macro_export]
 macro_rules! assert_fp_eq {
